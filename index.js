@@ -16,13 +16,19 @@ const PORT = process.env.PORT || 2000;
 bot.telegram.setWebhook(`${URL}bot${BOT_TOKEN}`);
 bot.startWebhook(`/bot${BOT_TOKEN}`, null, PORT);
 
+const aboutMenu = Telegraf.Extra
+  .markdown()
+  .markup((m) => m.keyboard([
+    m.callbackButton('⬅️ Back')
+  ]).resize())
+
 // Start Bot
 bot.start(ctx => {
   ctx.reply(
-    `How can I help you, ${ctx.from.first_name}?`,
-    Markup.inlineKeyboard([
-      Markup.callbackButton("💱 Convert Currency", "CONVERT_CURRENCY")
-    ]).extra()
+    `How can I help you, ${ctx.from.first_name}?`, aboutMenu
+//     Markup.inlineKeyboard([
+//       Markup.callbackButton("💱 Convert Currency", "CONVERT_CURRENCY")
+//     ]).extra()
   );
 });
 
