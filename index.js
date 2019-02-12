@@ -51,6 +51,20 @@ https://chatbotslife.com/build-a-simple-telegram-currency-converter-bot-with-nod
   return currencyConverter.leave()
 });
 
+const inlineMessageRatingKeyboard = Markup.inlineKeyboard([
+    Markup.callbackButton('👍', 'like'),
+    Markup.callbackButton('👎', 'dislike')
+]).extra()
+
+bot.command('test', (ctx) => ctx.telegram.sendMessage(
+    ctx.from.id,
+    'Like?',
+    inlineMessageRatingKeyboard)
+)
+
+telegram.action('like', (ctx) => ctx.editMessageText('🎉 Awesome! 🎉'))
+telegram.action('dislike', (ctx) => ctx.editMessageText('okey'))
+
 
 
 
